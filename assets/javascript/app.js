@@ -109,12 +109,14 @@ $(document).ready(function(){
         //on click event to track the user's answer selection
         $(".thisChoice").on("click", function(){
             userSelection = $(this).data('index');
+            //changes user selection from string to integer
             userSelection = parseInt(userSelection);
             clearInterval(time);
             answerPage();
+            console.log(userSelection);
         });
 
-        console.log(userSelection);
+        
     }
 
     function countdown() {
@@ -135,6 +137,7 @@ $(document).ready(function(){
     }
 
     function answerPage() {
+        $("#timer").empty();
         $("#currentQuestion").empty();
         $(".thisChoice").empty();
 
@@ -148,21 +151,24 @@ $(document).ready(function(){
         if ((userSelection === rightAnswerIndex) && (answered = true)){
             correctAnswer++;
             $('#message').html(messages.correct);
+            currentQuestionIndex++;
         } 
         else if ((userSelection != rightAnswerIndex) && (answered = true)){
             incorrectAnswer++;
             $('#message').html(messages.incorrect);
             $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
+            currentQuestionIndex++;
         } 
         else { 
             noAnswer++;
-            $('#message').html(messages.endTime);
+            $('#message').html(messages.outOfTime);
             $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
             answered = true;
+            currentQuestionIndex++;
         }
         
         if (currentQuestionIndex == (questionArray.length-1)){
-            setTimeout(scoreboard, 5000)
+            setTimeout(endOfGame, 5000)
         } 
         else {
             currentQuestion++;
@@ -174,5 +180,20 @@ $(document).ready(function(){
         $(this).hide();
         newGame();
     });
+
+    function endOfGame(){
+        $('#timeLeft').empty();
+        $('#message').empty();
+        $('#correctedAnswer').empty();
+        $('#gif').empty();
     
+        $('#finalMessage').html(messages.done);
+        $('#correctAnswers').html("Correct Answers: " + correctAnswer);
+        $('#incorrectAnswers').html("Incorrect Answers: " + incorrectAnswer);
+        $('#unanswered').html("Unanswered: " + noAnswer);
+        $('#startOverBtn').addClass('reset');
+        $('#startOverBtn').show();
+        $('#startOverBtn').html('Start Over?');
+    }
+
 });
