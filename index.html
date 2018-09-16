@@ -5,16 +5,46 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Harry Potter Trivia</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
     <script src="assets/javascript/app.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" media="screen" href="assets/css/style.css" />
 </head>
 <body>
-    <p id="timer"></p>
-    
-    
+    <div class="container">
+
+        <div class="row m-5 p-5 text-center">
+            <div class="col-12 my-4">
+                <h1>Harry Potter Triva</h1>
+            </div>
+            <div class="col-12 my-2">
+                <h4>Test your knowledge of the wizarding world!</h4>
+                <button type="button" class="btn btn-light" id="startBtn">START</button>
+            </div>
+        </div>
+
+        <div class="row m-5 p-5 text-center">
+            <div class="col-12 my-4">
+                <!-- Page displaying question -->
+                <div id="timer"></div>
+                <div id="currentQuestion"></div>
+                <div id="answerChoices"></div>
+                <!-- Answer page -->
+                <div id="message"></div>
+                <div id="answerReveal"></div>
+                <div id="gif"></div>
+                <!-- End of game page  -->
+                <div id="finalMessage"></div>
+                <div id="correctAnswers"></div>
+                <div id="wrongAnswers"></div>
+                <div id="noAnswer"></div>
+                <div id="startOverBtn"></div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
