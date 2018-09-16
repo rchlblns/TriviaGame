@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var timeLeft = 60;
+    var timeLeft = 15;
     var userSelect;
     var answered;
     var correctAnswer = 0; //total times user guessed right
@@ -107,7 +107,7 @@ $(document).ready(function(){
         }
 
         //on click event to track the user's answer selection
-        $("#thisChoice").on("click", function(){
+        $(".thisChoice").on("click", function(){
             userSelection = $(this).data('index');
             clearInterval(time);
             answerPage();
@@ -115,7 +115,7 @@ $(document).ready(function(){
     }
 
     function countdown() {
-        var timeLeft = 60;
+        var timeLeft = 15;
         $("#timer").html("<h3> Time remaining: " + timeLeft + "</h3>");
         answered = true;
         time = setInterval(showCountdown, 1000);
@@ -135,35 +135,35 @@ $(document).ready(function(){
         $(".currentQuestion").empty();
         $(".thisChoice").empty();
 
-    //     //this variable is equal to the answer of the current question
-    //     var rightAnswerText = questionArray[currentQuestionIndex].answerList[questionArray[currentQuestionIndex].answer];
-    //     var rightAnswerIndex = questionArray[currentQuestionIndex].answer;
-    //     $('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestionIndex] +'.gif" width = "400px">');
+        //this variable is equal to the answer of the current question
+        var rightAnswerText = questionArray[currentQuestionIndex].answerList[questionArray[currentQuestionIndex].answer];
+        var rightAnswerIndex = questionArray[currentQuestionIndex].answer;
+        $('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestionIndex] +'.gif" width = "400px">');
 
-    //     //checks to see if answer was correct or incorrect or if unanswered
-    //     if ((userSelection == rightAnswerIndex) && (answered == true)){
-    //         correctAnswer++;
-    //         $('#message').html(messages.correct);
-    //     } 
-    //     else if ((userSelection != rightAnswerIndex) && (answered == true)){
-    //         incorrecttAnswer++;
-    //         $('#message').html(messages.incorrect);
-    //         $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
-    //     } 
-    //     else { 
-    //         noAnswer++;
-    //         $('#message').html(messages.endTime);
-    //         $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
-    //         answered = true;
-    //     }
+        //checks to see if answer was correct or incorrect or if unanswered
+        if ((userSelection == rightAnswerIndex) && (answered == true)){
+            correctAnswer++;
+            $('#message').html(messages.correct);
+        } 
+        else if ((userSelection != rightAnswerIndex) && (answered == true)){
+            incorrecttAnswer++;
+            $('#message').html(messages.incorrect);
+            $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
+        } 
+        else { 
+            noAnswer++;
+            $('#message').html(messages.endTime);
+            $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
+            answered = true;
+        }
         
-    //     if (currentQuestionIndex == (questionArray.length-1)){
-    //         setTimeout(scoreboard, 5000)
-    //     } 
-    //     else {
-    //         currentQuestion++;
-    //         setTimeout(newQuestion, 5000);
-    //     }	
+        if (currentQuestionIndex == (questionArray.length-1)){
+            setTimeout(scoreboard, 5000)
+        } 
+        else {
+            currentQuestion++;
+            setTimeout(newQuestion, 5000);
+        }	
     }
 
     $("#startOverBtn").on("click", function(){
