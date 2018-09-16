@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
     var timeLeft = 15;
-    var userSelect;
+    var userSelection;
     var answered;
     var correctAnswer = 0; //total times user guessed right
     var incorrectAnswer= 0; // total times user guessed wrong
@@ -65,7 +65,7 @@ $(document).ready(function(){
 
     var messages = {
         correct: "Nice! You got it right!",
-        incorrect: "Nope!",
+        incorrect: "Sorry!",
         outOfTime: "Times up!",
         done: "Alright! Let's see how you did."
     }
@@ -109,9 +109,12 @@ $(document).ready(function(){
         //on click event to track the user's answer selection
         $(".thisChoice").on("click", function(){
             userSelection = $(this).data('index');
+            userSelection = parseInt(userSelection);
             clearInterval(time);
             answerPage();
         });
+
+        console.log(userSelection);
     }
 
     function countdown() {
@@ -132,21 +135,22 @@ $(document).ready(function(){
     }
 
     function answerPage() {
-        $(".currentQuestion").empty();
+        $("#currentQuestion").empty();
         $(".thisChoice").empty();
 
         //this variable is equal to the answer of the current question
-        var rightAnswerText = questionArray[currentQuestionIndex].answerList[questionArray[currentQuestionIndex].answer];
-        var rightAnswerIndex = questionArray[currentQuestionIndex].answer;
+        var rightAnswerText = questionArray[currentQuestionIndex].choices[questionArray[currentQuestionIndex].correct];
+        //this variable is equal to the index of the answer to the current question
+        var rightAnswerIndex = questionArray[currentQuestionIndex].correct;
         $('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestionIndex] +'.gif" width = "400px">');
 
-        //checks to see if answer was correct or incorrect or if unanswered
-        if ((userSelection == rightAnswerIndex) && (answered == true)){
+        //checks to see if answer was correct/incorrect or if unanswered
+        if ((userSelection === rightAnswerIndex) && (answered = true)){
             correctAnswer++;
             $('#message').html(messages.correct);
         } 
-        else if ((userSelection != rightAnswerIndex) && (answered == true)){
-            incorrecttAnswer++;
+        else if ((userSelection != rightAnswerIndex) && (answered = true)){
+            incorrectAnswer++;
             $('#message').html(messages.incorrect);
             $('#answerReveal').html('The correct answer was: ' + rightAnswerText);
         } 
