@@ -1,6 +1,6 @@
 $(document).ready(function(){
 
-    var timeLeft;
+    var timeLeft = 60;
     var userSelect;
     var answered;
     var correctAnswer = 0; //total times user guessed right
@@ -95,7 +95,7 @@ $(document).ready(function(){
         $("#gif").empty();
         answered = true;
         countdown();
-        
+
         $("#currentQuestion").html("<h2>" + questionArray[currentQuestionIndex].question + "</h2>");
 
         for (var i =0; i < 4; i++) {
