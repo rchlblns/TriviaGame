@@ -31,8 +31,8 @@ $(document).ready(function(){
             correct: 0,
         },
         {
-            question: "Which two countries competed in the Quidditch World Cup?", 
-            choices: ["England and France", "Egypt and Moldova", "Senegal and China", "Ireland and Bulgaria"],
+            question: "Who gives Harry the Mauraders Map?", 
+            choices: ["Dumbledore", "Hagrid", "Lupin", "Fred and George"],
             correct: 3,
         },
         {
@@ -46,8 +46,8 @@ $(document).ready(function(){
             correct: 1,
         },
         {
-            question: "What is Dumbledore's favorite candy?", 
-            choices: ["Lemon Drops", "Exploding Bonbons", "Chocolate Cauldrons", "Fizzing Wizzbees"],
+            question: "How many tasks are in the Triwizard Tournament?", 
+            choices: ["3", "8", "5", "10"],
             correct: 0,
         },
         {
@@ -64,7 +64,7 @@ $(document).ready(function(){
 
     var gifArray = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"];
 
-    var messages = {
+    var message = {
         correct: "Nice! You got it right!",
         incorrect: "Sorry!",
         outOfTime: "Times up!",
@@ -73,6 +73,7 @@ $(document).ready(function(){
 
     $("#startBtn").on("click", function(){
         $(this).hide();
+        $("#intro").hide();
         newGame();
     });
 
@@ -85,8 +86,8 @@ $(document).ready(function(){
         correctAnswer = 0;
         incorrectAnswer = 0;
         noAnswer = 0;
-        newQuestion();
-        // countdown();
+        timeLeft = 15;
+        newQuestion();  
     }
 
     function newQuestion() {
@@ -96,7 +97,7 @@ $(document).ready(function(){
         $("#answerReveal").empty();
         $("#gif").empty();
         answered = true;
-        countdown();
+        runTimer();
 
         $("#currentQuestion").html("<h2>" + questionArray[currentQuestionIndex].question + "</h2>");
 
@@ -113,7 +114,7 @@ $(document).ready(function(){
             userSelection = $(this).data('index');
             //changes user selection from string to integer
             userSelection = parseInt(userSelection);
-            clearInterval(time);
+            clearInterval(intervalId);
             answerPage();
             console.log(userSelection);
         });
@@ -122,8 +123,8 @@ $(document).ready(function(){
     }
 
     function runTimer() {
-        // var timeLeft = 15;
-        // $("#timer").html("<h3> Time remaining: " + timeLeft + "</h3>");
+
+        $("#timer").html("<h2> Time remaining: " + timeLeft + "</h2>");
         clearInterval(intervalId)
         intervalId = setInterval(showCountdown, 1000);
         answered = true;
@@ -131,7 +132,7 @@ $(document).ready(function(){
 
     function showCountdown() {
         timeLeft--;
-        $("#timer").html("<h3> Time remaining: " + timeLeft + "</h3>");
+        $("#timer").html("<h2> Time remaining: " + timeLeft + "</h32");
         if (timeLeft === 0) {
             clearInterval(intervalId);
             answered = false;
@@ -148,22 +149,22 @@ $(document).ready(function(){
         var rightAnswerText = questionArray[currentQuestionIndex].choices[questionArray[currentQuestionIndex].correct];
         //this variable is equal to the index of the answer to the current question
         var rightAnswerIndex = questionArray[currentQuestionIndex].correct;
-        $('#gif').html('<img src = "assets/images/'+ gifArray[currentQuestionIndex] +'.gif" width = "400px">');
+        $("#gif").html('<img src = "assets/images/'+ gifArray[currentQuestionIndex] +'.gif" width = "600px">');
 
         //checks to see if answer was correct/incorrect or if unanswered
         if ((userSelection === rightAnswerIndex) && (answered = true)){
             correctAnswer++;
-            $('#message').html(messages.correct);
+            $("#message").html(message.correct);
         } 
         else if ((userSelection != rightAnswerIndex) && (answered = true)){
             incorrectAnswer++;
-            $('#message').html(messages.incorrect);
-            $('#answerReveal').html('The correct answer was ' + rightAnswerText);
+            $("#message").html(message.incorrect);
+            $("#answerReveal").html("The correct answer was " + rightAnswerText);
         } 
         else { 
             noAnswer++;
-            $('#message').html(messages.outOfTime);
-            $('#answerReveal').html('The correct answer was ' + rightAnswerText);
+            $("#message").html(message.outOfTime);
+            $("#answerReveal").html("The correct answer was " + rightAnswerText);
             answered = true;
         }
         
@@ -178,22 +179,21 @@ $(document).ready(function(){
 
     $("#startOverBtn").on("click", function(){
         $(this).hide();
-        newGame();game 
+        newGame();
     });
 
     function endOfGame(){
-        $('#timeLeft').empty();
-        $('#message').empty();
-        $('#correctedAnswer').empty();
-        $('#gif').empty();
-    
-        $('#finalMessage').html(messages.done);
-        $('#correctAnswers').html("Correct Answers: " + correctAnswer);
-        $('#wrongAnswers').html("Incorrect Answers: " + incorrectAnswer);
-        $('#noAnswer').html("Unanswered: " + noAnswer);
-        $('#startOverBtn').addClass('reset');
-        $('#startOverBtn').show();
-        $('#startOverBtn').html('Start Over?');
+        $("#timeLeft").empty();
+        $("#message").empty();
+        $("#answerReveal").empty();
+        $("#gif").empty();
+        $("#finalMessage").html(+ message.done);
+        $("#correctAnswers").html("Correct Answers: " + correctAnswer);
+        $("#wrongAnswers").html("Incorrect Answers: " + incorrectAnswer);
+        $("#noAnswer").html("Unanswered: " + noAnswer);
+        $("#startOverBtn").addClass("reset");
+        $("#startOverBtn").show();
+        $("#startOverBtn").html("Start Over?");
     }
 
 });

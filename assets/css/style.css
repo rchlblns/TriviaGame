@@ -1,8 +1,30 @@
 body {
-    background-image: url("../images/hpiconography.jpg");
+    background-image: url("../images/hogwarts.jpg");
 }
 
 .container {
-    background-color: white;
-    
+    font-family: "IM Fell Double Pica SC", serif;
+    color: #F1F1F1;
+    text-align: center;
+    margin: 0 auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.title {
+    font-family: "IM Fell Great Primer SC", serif;
+    font-size: 80px;
+    color: #F1F1F1;
+    text-align: center;
+    margin: 100px;
+}
+
+#intro, #message, #currentQuestion, #answerReveal, #answerChoices {
+    font-size: 30px;
+}
+
+.thisChoice:hover {
+    color: red;
 }
