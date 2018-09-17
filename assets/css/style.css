@@ -29,6 +29,6 @@ body {
     margin-bottom: 5px;
 }
 
-.thisChoice:hover {
+.thisChoice:hover, .reset:hover {
     color: red;
 }
