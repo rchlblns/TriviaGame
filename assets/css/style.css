@@ -21,8 +21,12 @@ body {
     margin: 100px;
 }
 
-#intro, #message, #currentQuestion, #answerReveal, #answerChoices {
+#intro, #message, #currentQuestion, #answerReveal, #answerChoices, #finalMessage, #correctAnswers, #wrongAnswers, #noAnswer, .reset {
     font-size: 30px;
+}
+
+#answerChoices {
+    margin-bottom: 5px;
 }
 
 .thisChoice:hover {

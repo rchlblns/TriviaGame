@@ -6,9 +6,10 @@ $(document).ready(function(){
     var answered;
     var correctAnswer = 0; //total times user guessed right
     var incorrectAnswer= 0; // total times user guessed wrong
-    var noAnswer = 0; //total times user did not guess answer
+    // var noAnswer = 0; //total times user did not guess answer
     var currentQuestionIndex = 0; //counts how many questions have been asked
 
+    //Question set
     var questionArray = [
         {
             question: "What is Neville Longbottom's bogart?", 
@@ -62,13 +63,14 @@ $(document).ready(function(){
         }
     ];
 
+    //Gifs that correspond with each question
     var gifArray = ["Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7", "Q8", "Q9", "Q10"];
 
     var message = {
         correct: "Nice! You got it right!",
         incorrect: "Sorry!",
         outOfTime: "Times up!",
-        done: "Alright! Let's see how you did."
+        done: "Alright, let's see how you did!"
     }
 
     $("#startBtn").on("click", function(){
@@ -81,7 +83,8 @@ $(document).ready(function(){
         $("#finalMessage").empty();
         $("#correctAnswers").empty();
         $("#wrongAnswers").empty();
-        $("#noAnswer").empty();
+        // $("#noAnswer").empty();
+        $("#startOverBtn").hide();
         currentQuestionIndex = 0;
         correctAnswer = 0;
         incorrectAnswer = 0;
@@ -92,11 +95,11 @@ $(document).ready(function(){
 
     function newQuestion() {
 
-        timeLeft = 15;
+        timeLeft = 30;
         $("#message").empty();
         $("#answerReveal").empty();
         $("#gif").empty();
-        answered = true;
+        // answered = true;
         runTimer();
 
         $("#currentQuestion").html("<h2>" + questionArray[currentQuestionIndex].question + "</h2>");
@@ -116,7 +119,8 @@ $(document).ready(function(){
             userSelection = parseInt(userSelection);
             clearInterval(intervalId);
             answerPage();
-            console.log(userSelection);
+            
+            // console.log(userSelection);
         });
 
         
@@ -127,15 +131,16 @@ $(document).ready(function(){
         $("#timer").html("<h2> Time remaining: " + timeLeft + "</h2>");
         clearInterval(intervalId)
         intervalId = setInterval(showCountdown, 1000);
-        answered = true;
+        // answered = true;
     }
 
     function showCountdown() {
         timeLeft--;
         $("#timer").html("<h2> Time remaining: " + timeLeft + "</h32");
-        if (timeLeft === 0) {
-            clearInterval(intervalId);
+
+        if (timeLeft < 1) {
             answered = false;
+            clearInterval(intervalId);
             answerPage();
         }
     }
@@ -152,28 +157,28 @@ $(document).ready(function(){
         $("#gif").html('<img src = "assets/images/'+ gifArray[currentQuestionIndex] +'.gif" width = "600px">');
 
         //checks to see if answer was correct/incorrect or if unanswered
-        if ((userSelection === rightAnswerIndex) && (answered = true)){
+        if ((userSelection === rightAnswerIndex) && (answered = true)) {
             correctAnswer++;
             $("#message").html(message.correct);
         } 
-        else if ((userSelection != rightAnswerIndex) && (answered = true)){
+        else if ((userSelection !== rightAnswerIndex) && (answered = true)) {
             incorrectAnswer++;
             $("#message").html(message.incorrect);
             $("#answerReveal").html("The correct answer was " + rightAnswerText);
         } 
-        else { 
-            noAnswer++;
-            $("#message").html(message.outOfTime);
-            $("#answerReveal").html("The correct answer was " + rightAnswerText);
-            answered = true;
-        }
+        // else { 
+        //     noAnswer++;
+        //     $("#message").html(message.outOfTime);
+        //     $("#answerReveal").html("The correct answer was " + rightAnswerText);
+        //     // answered = true;
+        // }
         
         if (currentQuestionIndex == (questionArray.length-1)){
-            setTimeout(endOfGame, 4000)
+            setTimeout(endOfGame, 3000)
         } 
         else {
             currentQuestionIndex++;
-            setTimeout(newQuestion, 4000);
+            setTimeout(newQuestion, 3000);
         }	
     }
 
@@ -187,10 +192,10 @@ $(document).ready(function(){
         $("#message").empty();
         $("#answerReveal").empty();
         $("#gif").empty();
-        $("#finalMessage").html(+ message.done);
+        $("#finalMessage").html(message.done);
         $("#correctAnswers").html("Correct Answers: " + correctAnswer);
         $("#wrongAnswers").html("Incorrect Answers: " + incorrectAnswer);
-        $("#noAnswer").html("Unanswered: " + noAnswer);
+        // $("#noAnswer").html("Unanswered: " + noAnswer);
         $("#startOverBtn").addClass("reset");
         $("#startOverBtn").show();
         $("#startOverBtn").html("Start Over?");
