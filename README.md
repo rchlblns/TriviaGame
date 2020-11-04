@@ -1,5 +1,7 @@
 # Trivia Game
 
+![Trivia Game screenshot](https://user-images.githubusercontent.com/41342213/98136314-6c846900-1e86-11eb-82ab-344e36ba1935.png)
+
 Created and submitted during Week 5 of UT Austin's Houston Coding Bootcamp.  
 
 In this assignment, the challenge was to create a timed trivia game. My game is Harry Potter themed. The player is allotted 30 seconds and has 4 answers to choose from. At the end of the game, a scoreboard displays their final score.
